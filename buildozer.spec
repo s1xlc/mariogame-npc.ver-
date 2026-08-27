@@ -2,6 +2,7 @@
 title = Mario Game
 package.name = mariogame
 package.domain = org.mariogame
+source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,wav,mp3,mp4
 source.include_dir = assets
 version = 0.1
