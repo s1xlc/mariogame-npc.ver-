@@ -7,12 +7,12 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,wav,mp3,mp4
 source.include_dir = assets
 version = 0.1
-requirements = python3.11,kivy
+requirements = kivy,certifi,chardet,filetype,idna,requests,six,urllib3
 orientation = portrait
 fullscreen = 1
 android.permissions = INTERNET
 
-# Add these explicit versions to avoid license/build-tools errors
+# Explicit versions to avoid license/build-tools errors
 android.api = 33
 android.min_api = 21
 android.sdk = 33
