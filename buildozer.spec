@@ -1,4 +1,5 @@
 [app]
+# (existing settings...)
 title = Mario Game
 package.name = mariogame
 package.domain = org.mariogame
@@ -10,3 +11,10 @@ requirements = python3,kivy
 orientation = portrait
 fullscreen = 1
 android.permissions = INTERNET
+
+# Add these explicit versions to avoid license/build-tools errors
+android.api = 33
+android.min_api = 21
+android.sdk = 33
+android.ndk = 25b
+android.accept_sdk_license = True
