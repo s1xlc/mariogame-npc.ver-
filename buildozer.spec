@@ -3,8 +3,6 @@
 title = Mario Game
 package.name = mariogame
 package.domain = org.mariogame
-
-# (str) Version of your application
 version = 0.1
 
 source.dir = .
@@ -13,6 +11,7 @@ requirements = python3,kivy,pyjnius
 orientation = portrait
 android.permissions = INTERNET
 
+# Lock API and SDK targets to stable versions
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
