@@ -21,22 +21,51 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev libsdl2-dev libsdl2-image-dev \
-            libsdl2-mixer-dev libsdl2-ttf-dev libffi-dev libssl-dev
+            git \
+            zip \
+            unzip \
+            openjdk-17-jdk \
+            python3-pip \
+            python3-venv \
+            autoconf \
+            libtool \
+            pkg-config \
+            zlib1g-dev \
+            libncurses5-dev \
+            libncursesw5-dev \
+            libsdl2-dev \
+            libsdl2-image-dev \
+            libsdl2-mixer-dev \
+            libsdl2-ttf-dev \
+            libffi-dev \
+            libssl-dev
 
       - name: Create Virtual Environment
-        run: python3 -m venv venv
+        run: |
+          python3 -m venv venv
 
-      - name: Upgrade Pip & Install Buildozer
-        run: ./venv/bin/pip install --upgrade pip cython==0.29.36 buildozer "pydantic<2"
+      - name: Install Buildozer and Dependencies
+        run: |
+          ./venv/bin/python -m pip install --upgrade pip setuptools wheel
+          ./venv/bin/python -m pip install cython==0.29.36
+          ./venv/bin/python -m pip install buildozer
+          ./venv/bin/python -m pip install "pydantic<2"
+
+      - name: Check Python and Cython
+        run: |
+          export PATH="$GITHUB_WORKSPACE/venv/bin:$PATH"
+          python --version
+          python3 --version
+          cython --version
+          buildozer --version
 
       - name: Run Buildozer
         run: |
-          yes | ./venv/bin/buildozer -v android debug
+          export PATH="$GITHUB_WORKSPACE/venv/bin:$PATH"
+          yes | buildozer -v android debug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: package
+          name: Mario-Game-APK
           path: bin/*.apk
