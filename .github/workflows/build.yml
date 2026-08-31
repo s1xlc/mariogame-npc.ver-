@@ -25,15 +25,13 @@ jobs:
             zlib1g-dev libncurses5-dev libncursesw5-dev libsdl2-dev libsdl2-image-dev \
             libsdl2-mixer-dev libsdl2-ttf-dev libffi-dev libssl-dev
 
-      - name: Create Virtual Environment
-        run: python3 -m venv venv
-
-      - name: Upgrade Pip & Install Buildozer
-        run: ./venv/bin/pip install --upgrade pip cython==0.29.36 buildozer "pydantic<2"
+      - name: Install Buildozer & Core Dependencies Globally
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade cython==0.29.36 buildozer "pydantic<2"
 
       - name: Run Buildozer
         run: |
-          export PATH="$PWD/venv/bin:$PATH"
           buildozer -v android debug
 
       - name: Upload APK Artifact
