@@ -25,17 +25,14 @@ jobs:
             zlib1g-dev libncurses5-dev libncursesw5-dev libsdl2-dev libsdl2-image-dev \
             libsdl2-mixer-dev libsdl2-ttf-dev libffi-dev libssl-dev
 
-      - name: Set up Python Virtual Environment & Install Buildozer
-        run: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install --upgrade pip
-          pip install --upgrade cython==0.29.36 buildozer pydantic<2
+      - name: Create Virtual Environment
+        run: python3 -m venv venv
+
+      - name: Upgrade Pip & Install Buildozer
+        run: ./venv/bin/pip install --upgrade pip cython==0.29.36 buildozer pydantic<2
 
       - name: Run Buildozer
-        run: |
-          . venv/bin/activate
-          buildozer -v android debug
+        run: ./venv/bin/buildozer -v android debug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
