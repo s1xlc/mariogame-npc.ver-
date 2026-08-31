@@ -32,7 +32,13 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade cython==0.29.36 buildozer
 
-      - name: Run Buildozer
+      - name: Run Buildozer (First pass to fetch SDK tools)
+        continue-on-error: true
+        run: |
+          source venv/bin/activate
+          yes | buildozer -v android debug || true
+
+      - name: Run Buildozer (Second pass to build APK)
         run: |
           source venv/bin/activate
           buildozer -v android debug
