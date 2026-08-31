@@ -28,13 +28,13 @@ jobs:
       - name: Set up Python Virtual Environment & Install Buildozer
         run: |
           python3 -m venv venv
-          source venv/bin/activate
+          . venv/bin/activate
           pip install --upgrade pip
           pip install --upgrade cython==0.29.36 buildozer pydantic<2
 
       - name: Run Buildozer
         run: |
-          source venv/bin/activate
+          . venv/bin/activate
           buildozer -v android debug
 
       - name: Upload APK Artifact
