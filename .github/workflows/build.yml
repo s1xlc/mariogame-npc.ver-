@@ -30,15 +30,9 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
-          pip install --upgrade cython==0.29.36 buildozer
+          pip install --upgrade cython==0.29.36 buildozer pydantic<2
 
-      - name: Run Buildozer (First pass to fetch SDK tools)
-        continue-on-error: true
-        run: |
-          source venv/bin/activate
-          yes | buildozer -v android debug || true
-
-      - name: Run Buildozer (Second pass to build APK)
+      - name: Run Buildozer
         run: |
           source venv/bin/activate
           buildozer -v android debug
